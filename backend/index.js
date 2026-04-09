@@ -43,4 +43,9 @@ app.get('/api/stats', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Backend running on 3000'));
+// Eksport app do testów
+module.exports = app;
+
+if (require.main === module) {
+  app.listen(3000, () => console.log('Backend running on 3000'));
+}

@@ -16,6 +16,14 @@ RUN npm run build
 # --- Etap production: obraz Nginx z gotowym buildem ---
 FROM nginx:1.25-alpine AS production
 
+ARG BUILD_DATE
+ARG VERSION
+ARG NODE_ENV=production
+
+LABEL org.opencontainers.image.created="${BUILD_DATE}"
+LABEL org.opencontainers.image.version="${VERSION}"
+LABEL org.opencontainers.image.title="product-dashboard-frontend"
+
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx && \
